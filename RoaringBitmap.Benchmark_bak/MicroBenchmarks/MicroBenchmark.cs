@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
 using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Running;
 
 namespace RoaringBitmap.Benchmark.MicroBenchmarks
 {
@@ -12,15 +11,12 @@ namespace RoaringBitmap.Benchmark.MicroBenchmarks
         protected MicroBenchmark(string fileName)
         {
             var m_Path = @"Data";
-            using (var provider = new ZipRealDataProvider(@$"D:\Work\Source\shibox\Repos\RoaringBitmap\RoaringBitmap.Benchmark\bin\Release\net6.0\publish{Path.DirectorySeparatorChar}{m_Path}{Path.DirectorySeparatorChar}{fileName}"))
-            //using (var provider = new ZipRealDataProvider(Path.Combine(m_Path, fileName)))
+
+            using (var provider = new ZipRealDataProvider(Path.Combine(m_Path, fileName)))
             {
                 m_Bitmaps = provider.ToArray();
             }
         }
-
-        [Params(1)]
-        public int N;
 
         [Benchmark]
         public long Or()
@@ -67,7 +63,7 @@ namespace RoaringBitmap.Benchmark.MicroBenchmarks
         }
 
 
-        //[Benchmark]
+        [Benchmark]
         public long Iterate()
         {
             var total = 0L;

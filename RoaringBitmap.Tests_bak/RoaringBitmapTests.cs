@@ -10,8 +10,7 @@ namespace RoaringBitmap.Tests
     {
         private static Stream GetResourceStream(string name)
         {
-            return new FileStream(name,FileMode.Open);
-            //return typeof(RoaringBitmapTests).Assembly.GetManifestResourceStream(typeof(RoaringBitmapTests), name);
+            return typeof(RoaringBitmapTests).Assembly.GetManifestResourceStream(typeof(RoaringBitmapTests), name);
         }
 
         private static List<int> CreateMixedListOne()
